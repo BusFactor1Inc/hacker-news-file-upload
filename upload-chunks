@@ -1,0 +1,27 @@
+#!/bin/ksh
+
+chunk=0
+
+body=
+filename="$1"
+url="${HNU_url}/r"
+
+while read line; do 
+    case "$line" in 
+	"-- --") collect=t;;
+	"== ==") collect=;;
+    esac
+
+    title="$filename [$((chunk++))]"
+
+    if [[ -z $collect ]]; then
+	echo "t=$title&x=$body" | ./post "$url"
+    else
+	body="$body$line"
+    fi
+done
+echo "t=${title}/${count}&x=$body" | ./post "$url"
+
+
+
+

@@ -1,0 +1,8 @@
+#!/bin/ksh
+
+error () {
+      thing=$1; shift;
+      echo $0: "'$thing'": $* 1>&2
+}
+
+

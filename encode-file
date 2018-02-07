@@ -1,0 +1,27 @@
+#!/bin/ksh
+
+. ./error
+
+export HNU_encoder
+
+HNU_encoder_program=$(
+    if [[ -z $HNU_encoder ]]; then
+	echo cat
+    else
+	case "$HNU_encoder" in
+	    none) echo cat;;
+	    od-x) echo od -x;;
+	    rot-13) echo rot13;;
+	    morse-code) echo morse;;
+	    spoken-number) echo number;;
+	    *) error "$HNU_encoder" unknown encoding >&2; exit 1;;
+	esac
+    fi
+)
+
+echo Encoder: $HNU_encoder_program
+
+for file in "$@"; do
+    echo ++ ++
+    $HNU_encoder_program $file
+done

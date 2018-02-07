@@ -1,0 +1,13 @@
+#!/bin/ksh
+
+fnid=$(wget -O - http://localhost:8080/login ˜| grep fnid | tr '"' ' ' | cut -f 11 -d' ' | tail -n1)
+wget ${HNU_url-http://localhost:8080}/login --
+--save-cookies cookies.txt \
+    --keep-session-cookies \
+          
+fnid=$(wget -O - http://localhost:8080/submit ˜| grep fnid | tr '"' ' ' | cut -f 11 -d' ' | tail -n1)
+file=$2
+wget				\
+    --method=POST		\
+    --body-data "fnid=${fnid}&$(cat)"	\
+    "${HNU_url-http://localhost:8080}/r"

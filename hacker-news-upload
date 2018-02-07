@@ -1,0 +1,16 @@
+#!/bin/ksh
+
+export HNU_url
+export HNU_user
+export HNU_pass
+export HNU_encoder
+
+if [[ ! -z $DEBUG_only ]]; then
+    start-hacker-news-server
+fi
+
+while [[ ! -z "$*" ]]; do 
+    file=$1; shift
+    echo ++ ++
+    ./encode-file "$file" | ./chunk-file | ./upload-chunks "$file"
+done

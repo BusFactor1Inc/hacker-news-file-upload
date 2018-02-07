@@ -1,0 +1,10 @@
+#!/bin/ksh
+
+while read bof; do 
+    if [[ "$bof" == "++ ++" ]]; then
+	while read -N ${HNU_bufsize-2000} bytes; do
+	    echo -- -- # chunk marker
+	    echo "$bytes"
+	done
+    fi
+done
