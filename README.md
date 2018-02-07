@@ -89,6 +89,10 @@ binary encoding based on file size.
 
 --
 
+TODO: finish ./post (actually getting the file chunks into the server)
+
+--
+
 Burton Samograd
 
 2018
